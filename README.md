@@ -35,3 +35,6 @@ If you don't like to that, the PHP script should be simple enought to edit and m
 Callbacks are required due to the asyncronous nature of the internet. There are two sets of callbacks because some things need to be taken cared of on the WASM side and some things need to be taken cared of on the JavaScript side.
 
 See also "API\_call\_trace.png" 
+
+## Dev-Commentary
+I now understand that server side sandboxing is just as important as on client side and WebAssembly apps would greatly benefit from a good sandboxing solution.

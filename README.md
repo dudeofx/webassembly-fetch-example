@@ -1,5 +1,5 @@
 # webassembly-fetch-example
-A working example of using emscripten's fetch API to save and load raw data from the cloud. The WASM code maintains a simple queue to handle asyncronous the requests. The back-end is a simple PHP script. The data is saved and loaded from a file as opposed to using a SQL database.
+A working example of using emscripten's fetch API to save and load raw data from the cloud. The WASM code maintains a simple queue to handle asyncronous requests. The back-end is a simple PHP script. The data is saved and loaded from a file as opposed to using a SQL database.
 
 
 NOTE: To make it as simple as possible when saving data, I take everything on the request body and just dump it to a file. I created a propietary method called 'SPECIAL'. I was going to use 'POST' but I didn't want to complicate things with encoding data or worry about other specifications POST or PUT would require.
@@ -31,4 +31,7 @@ If you don't like to that, the PHP script should be simple enought to edit and m
   6. When the transaction is finished emscripten\_fetch() calls a callback function on the WASM side. These callback functions were provisioned when the tFetchWorkOrder was submitted. They are FetchTransferHandler() and FetchErrorHandler()
   7. The FetchXxxxHandler() functions then call another callback function on the JavaScript side (defined in index.html). These callbacks where provisioned when LoadData() or SaveData() are called. 
   8. The JavaScript callbacks do the final work.
-  9. Callbacks are required due to the asyncronous nature of the internet. There are two sets of callbacks because some things need to be taken cared of on the WASM side and some things need to be taken cared of on the JavaScript side.
+
+Callbacks are required due to the asyncronous nature of the internet. There are two sets of callbacks because some things need to be taken cared of on the WASM side and some things need to be taken cared of on the JavaScript side.
+
+See also "API\_call\_trace.png" 

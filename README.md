@@ -1,8 +1,8 @@
 # webassembly-fetch-example
-A working example of using emscripten's fetch API to save and load raw data from the cloud. The WASM code maintains a simple queue to handle asyncronous code. The back-end is a simple PHP script. The data is saved and loaded from a file as opposed to using a SQL database.
+A working example of using emscripten's fetch API to save and load raw data from the cloud. The WASM code maintains a simple queue to handle asyncronous the requests. The back-end is a simple PHP script. The data is saved and loaded from a file as opposed to using a SQL database.
 
 
-NOTE: To make it as simple as possible when saving data, I take everything on the request body and just dump it to a file. I created a propietary method called 'SPECIAL'. I was going to use 'POST' but I didn't want to complicate things with encoding data or worry about other specifications POST or PUT would requiere.
+NOTE: To make it as simple as possible when saving data, I take everything on the request body and just dump it to a file. I created a propietary method called 'SPECIAL'. I was going to use 'POST' but I didn't want to complicate things with encoding data or worry about other specifications POST or PUT would require.
 
 ## Quick Start
 Run build.sh to compile the example. This will create two files: 
@@ -16,8 +16,10 @@ To see the example run publish the four files below into your webserver
   * storage_handler.php
 
 NOTE: Make sure the php script has write access to the directory its in. I accomplished that in linux with:
+
     sudo chgrp www-data .
     sudo chmod . 775 
+
 If you don't like to that, the PHP script should be simple enought to edit and make it work to your liking.
 
 ## Tracing the API logic flow

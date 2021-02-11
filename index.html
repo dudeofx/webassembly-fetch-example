@@ -1,0 +1,38 @@
+<html>
+<body>
+   <script src="fetch_test.js"></script>
+
+   <script type='text/javascript'>
+      var LoadData = Module.cwrap('LoadData', null, ['number']);
+      var SaveData = Module.cwrap('SaveData', null, ['string', 'number']);
+
+       // WASM side calls this function after a submit
+       var onSave = Module.addFunction(
+          function onSave(response) {
+             document.getElementById('status').innerHTML = Module.UTF8ToString(response);
+          }, 'vi'
+       );
+
+       // WASM side calls this function after a retrieve
+       var onLoad = Module.addFunction(
+          function (data) {
+             document.getElementById('memo').value = Module.UTF8ToString(data);
+          }, 'vi'
+       );
+
+       // this function gets called when utils code is ready
+       function OnUtilsReady() {
+          LoadData(onLoad);
+       }
+
+       Module.OnUtilsReady = OnUtilsReady;
+
+   </script>
+
+   <label>Notepad:</label><br>
+   <textarea id="memo" rows="16" cols="80"></textarea><br>
+   <button onclick="LoadData(onLoad);" >Revert</button>
+   <button onclick="SaveData(document.getElementById('memo').value, onSave);" >Save</button>
+   <label id="status"></label>
+</body>
+</html>
